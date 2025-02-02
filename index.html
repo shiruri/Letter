@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+    <style>
+   /* Greenish gradient scrollbar */
+::-webkit-scrollbar {
+    width: 3px; /* or any preferred width */
+    height: 12px; /* for horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: linear-gradient(180deg, #27e97e, #3fe239); /* Greenish gradient */
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #93cfa9, #65cf7c); /* Darker green gradient for the thumb */
+    border-radius: 10px;
+    border: 3px solid #9bf39b; /* Optional: gives a border around the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #97dfb1, #b4f5b1); /* Slight hover effect */
+}
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            margin: 0;
+            padding: 0;
+            background-image: url("bg.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            .font-style {
+    font-family: "Arial Unicode MS", "Noto Sans", sans-serif;
+}
+        }
+
+	h1 {
+		font-size: 5.25vmin;
+		text-align: center;
+		color: rgb(123, 207, 144);
+	}
+	p {
+		font-size: max(10pt, 2.5vmin);
+		line-height: 1.4;
+		color: #0e390e;
+		margin-bottom: 1.5rem;
+	}
+
+	.wrap {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 85vmin;
+    height: 65vmin;
+    margin: 2rem auto;
+    border: 8px solid transparent; /* Transparent border */
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle, rgb(118, 221, 199) 0%, rgb(13, 231, 158) 100%);
+    transition: 0.3s ease-in-out;
+}
+.wrap::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    background: radial-gradient(circle, rgb(104, 221, 163) 0%, rgb(143, 214, 27) 100%);
+    z-index: -1;
+    border-radius: inherit;
+}
+
+.wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: inherit;
+    z-index: -1;
+    border-radius: inherit;
+}
+	.overlay {
+		position: relative;
+		display: flex;
+		width: 100%;
+		height: 100%;
+		padding: 1rem 0.75rem;
+		background-image: url("bgtry.jpg");
+		transition: 0.4s ease-in-out;
+		z-index: 1;
+	}
+	.overlay-content {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 15vmin;
+		height: 100%;
+		padding: 0.5rem 0 0 0.5rem;
+		border: 3px solid;
+		border-image: linear-gradient(
+				to bottom,
+				#86d4a4 5%,
+				rgb(150, 228, 185) 35% 65%,
+				#82e775 95%
+			)
+			0 0 0 100%;
+		transition: 0.3s ease-in-out 0.2s;
+		z-index: 1;
+	}
+	.image-content {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 60vmin;
+		height: 100%;
+		background-image: url("nyam2.jpg");
+		background-size: cover;
+		transition: 0.3s ease-in-out;
+		/* border: 1px solid green; */
+	}
+    .image-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60vmin;
+    height: 100%;
+    background-image: url("nyam2.jpg"); /* Default image */
+    background-size: cover;
+    transition: 0.3s ease-in-out;
+}
+
+.wrap:hover .image-content {
+    background-image: url("test.jpg"); /* New image on hover */
+}
+    
+
+	.inset {
+		max-width: 50%;
+		margin: 0.25em 1em 1em 0;
+		border-radius: 0.25em;
+		float: left;
+	}
+
+	.dots {
+		position: absolute;
+		bottom: 1rem;
+		right: 2rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;
+		width: 55px;
+		height: 4vmin;
+		transition: 0.3s ease-in-out 0.3s;
+	}
+	.dot {
+		width: 14px;
+		height: 14px;
+		background: rgb(51, 214, 124);
+		border: 1px solid rgb(154, 255, 221);
+		border-radius: 50%;
+		transition: 0.3s ease-in-out 0.3s;
+	}
+
+	.text {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 60vmin;
+		height: 100%;
+		padding: 3vmin 4vmin;
+		background: #fffefe;
+		box-shadow: inset 1px 1px 15px 0 rgba(0 0 0 / 0.4);
+		overflow-y: scroll;
+	}
+
+	.wrap:hover .overlay {
+		transform: translateX(-60vmin);
+	}
+	.wrap:hover .image-content {
+		width: 30vmin;
+	}
+	.wrap:hover .overlay-content {
+		border: none;
+		transition-delay: 0.2s;
+		transform: translateX(60vmin);
+	}
+	.wrap:hover .dots {
+		transform: translateX(1rem);
+	}
+	.wrap:hover .dots .dot {
+		background: rgb(202, 224, 206);
+	}
+
+	/* Animations and timing delays */
+	.animate {
+		animation-duration: 0.7s;
+		animation-timing-function: cubic-bezier(0.26, 0.53, 0.74, 1.48);
+		animation-fill-mode: backwards;
+	}
+	/* Pop In */
+	.pop {
+		animation-name: pop;
+	}
+	@keyframes pop {
+		0% {
+			opacity: 0;
+			transform: scale(0.5, 0.5);
+		}
+		100% {
+			opacity: 1;
+			transform: scale(1, 1);
+		}
+	}
+
+	/* Slide In */
+	.slide {
+		animation-name: slide;
+	}
+	@keyframes slide {
+		0% {
+			opacity: 0;
+			transform: translate(4em, 0);
+		}
+		100% {
+			opacity: 1;
+			transform: translate(0, 0);
+		}
+	}
+
+	/* Slide Left */
+	.slide-left {
+		animation-name: slide-left;
+	}
+	@keyframes slide-left {
+		0% {
+			opacity: 0;
+			transform: translate(-40px, 0);
+		}
+		100% {
+			opacity: 1;
+			transform: translate(0, 0);
+		}
+	}
+
+	.slide-up {
+		animation-name: slide-up;
+	}
+	@keyframes slide-up {
+		0% {
+			opacity: 0;
+			transform: translateY(3em);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.delay-1 {
+		animation-delay: 0.3s;
+	}
+	.delay-2 {
+		animation-delay: 0.6s;
+	}
+	.delay-3 {
+		animation-delay: 0.9s;
+	}
+	.delay-4 {
+		animation-delay: 1.2s;
+	}
+	.delay-5 {
+		animation-delay: 1.5s;
+	}
+	.delay-6 {
+		animation-delay: 1.8s;
+	}
+	.delay-7 {
+		animation-delay: 2.1s;
+	}
+	.delay-8 {
+		animation-delay: 2.4s;
+	}
+    .text img {
+    max-width: 100%; /* Ensure the image does not exceed the width of its container */
+    height: auto; /* Maintain the aspect ratio of the image */
+    border-radius: 8px; /* Optional: Add rounded corners */
+    margin: 1rem 0; /* Add some margin for spacing */
+    display: block; /* Ensure the image behaves as a block element */
+}
+.audio-player {
+  width: 90%; /* Make it responsive */
+  max-width: 300px; /* Limit maximum width */
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 0 auto; /* Center the player */
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  padding: 10px;
+  background-color: #beee98;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px; /* Adjust font size for smaller screens */
+}
+
+button:hover {
+  background-color: #9df56b;
+}
+
+input[type="range"] {
+  width: 100%;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: #ddd;
+  height: 4px;
+  border-radius: 2px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+  background: #50eb95;
+  border-radius: 50%;
+  margin-top: -6px;
+}
+
+input[type="range"]::-moz-range-track {
+  background: #ddd;
+  height: 4px;
+  border-radius: 2px;
+}
+
+input[type="range"]::-moz-range-thumb {
+  height: 16px;
+  width: 16px;
+  background: #83db87;
+  border-radius: 50%;
+  border: none;
+}
+#autoplayMessage {
+  color: #7d867e; /* Red color for emphasis */
+  text-align: center;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #b3ffcd;
+  border: 1px solid #ffadad;
+  border-radius: 5px;
+}
+</style>
+</head>
+<body>
+<div class="wrap animate pop">
+	<div class="overlay">
+		<div class="overlay-content animate slide-left delay-2">
+			<h1 class="animate slide-left pop delay-4">꒰✉︎꒱</h1>
+			<p class="animate slide-left pop delay-5" style="color: rgb(50, 255, 60); margin-bottom: 2.5rem;">For:<em>Morii</em></p>
+		</div>
+		<div class="image-content animate slide delay-5"></div>
+		<div class="dots animate">
+			<div class="dot animate slide-up delay-6"></div>
+			<div class="dot animate slide-up delay-7"></div>
+			<div class="dot animate slide-up delay-8"></div>
+		</div>
+	</div>
+	<div class="text">
+        <p id="autoplayMessage">Click anywhere to enable audio playback.</p>
+
+		<p><img class="inset" src="nyam.jpg" alt="" />────୨ৎ────
+            Halooooo after few hours of editing the designn finally writing thisss =͟͟͞͞ ⌧I just wanna say thank youu so muchh once againn! what you did last night actually really means a lot to me ₊˚⊹♡ like super duperr as in and this is a sign of my gratitude i really want to make something in returnn everything that you said is exactly what ive been wanting to hear from someone all these years huhuh so thank youuu so muchh
+        And i also just wanna tell youu againn if you ever need helpp whatever it iss I wont judge or anything  ⋆｡°✮🕷 so feel freee i really enjoy talking to youu °❀⋆.ೃ࿔*:･ and once again again AHAHAH thank youuu for letting me bother youu જ⁀➴ pew peww always stay hydrateddd yes yess matik since mainittt and whenever feel overwhelmedd take a deep breathhh ⊹˚. ♡。°˖  ᵎᵎ 💬 i enjoy adding this decor to the text made me feel like a girly girly HAHAHA WAIT THIS IS ADHD LITTERALY GETTING SIDETRACKED AAA anyways AHAHHAH Thank youuu alwaysss good healthh for alll of youu yes and always take caree 
+        ────୨ৎ──── ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢎⠱⠊⡱⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠤⠒⠒⠒⠒⠤⢄⣑⠁⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⢀⡤⠒⠝⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠲⢄⡀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⢀⡴⠋⠀⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀⢰⣢⠐⡄⠀⠉⠑⠒⠒⠒⣄
+        ⠀⠀⠀⣀⠴⠋⠀⠀⠀⡎⠀⠘⠿⠀⠀⢠⣀⢄⡢⠉⣔⣲⢸⠀⠀⠀⠀⠀⠀⢘
+        ⡠⠒⠉⠀⠀⠀⠀⠀⡰⢅⠫⠭⠝⠀⠀⠀⠀⠀⠀⢀⣀⣤⡋⠙⠢⢄⣀⣀⡠⠊
+        ⢇⠀⠀⠀⠀⠀⢀⠜⠁⠀⠉⡕⠒⠒⠒⠒⠒⠛⠉⠹⡄⣀⠘⡄⠀⠀⠀⠀⠀⠀
+        ⠀⠑⠂⠤⠔⠒⠁⠀⠀⡎⠱⡃⠀⠀⡄⠀⠄⠀⠀⠠⠟⠉⡷⠁⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⠤⠤⠴⣄⡸⠤⣄⠴⠤⠴⠄⠼⠀⠀⠀⠀⠀⠀⠀⠀
+        ────୨ৎ──── this really cant express my thanks to youu but yess ill always remember thiss thank youu thank youu I'm alsoo really gladd to know more of youu looking forward to getting to know youu ✧˖°.✧˖° also fun fact nothing starts with n and ends with g crazy right ⸜(｡˃ ᵕ ˂ )⸝♡ I really hope this works on phone since i made it on my laptop huhuh originally going to go with a tbhk themeed thoo cant find a matching stylee and colorr alsoo thanks to youu i get to have a good sleep because of the asmrr you sent it really helpss thank and alsoo just wanna clarify like if everr uhhh health > chats so yess just wanna clarify that againn and if school > chat yes my programming brain excuse that AHAHHAH commonly used to compare values so yep ehe  ≽^• ˕ • ྀི≼
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡴⢣⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣮⢱⠳⣜⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⡤⣠⠤⡀⠀⠀⢀⢀⡀⡀⠣⢏⣝⡲⠂⣀⡀⢀⠀⠀⠀⣠⢤⡠⠄⠀
+        ⠀⠸⢥⢫⣥⢰⣙⠎⠧⠽⢳⡜⣎⢒⠧⣝⠦⠽⠝⢺⢴⡠⣏⠶⡹⠀⠀
+        ⠀⠀⠀⢴⣊⠗⠀⡠⡔⡦⢄⠈⠊⠈⠉⢠⡠⣖⠤⡀⠀⢽⣒⠀⠀⠀⠀
+        ⠀⠀⢀⡳⠎⠀⡼⣱⣙⠊⠁⠁⠀⠀⠀⠉⠁⢊⠷⡹⡄⠈⣎⣅⠀⠀⠀
+        ⣀⠤⣼⣙⢇⠀⠑⡳⢎⠀⠀⠀⠀⠀⠀⠀⠀⠸⣍⣳⠀⢀⠧⣮⢄⡄⡀
+        ⠙⠃⠛⢜⠶⡐⠋⠑⠋⢵⠀⠀⠀⠀⠀⢀⢴⠙⠈⠓⢑⣬⢓⠎⠓⠘⠁
+        ⠀⠀⠀⠈⠧⡽⣠⢄⠀⠀⠉⠓⠀⠀⠐⠋⠀⠀⢀⡤⣚⠴⠏⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠑⠣⢏⠞⡵⣢⢀⠀⠀⢀⢤⡲⢭⢣⠳⠙⠁⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⢇⣏⢖⡠⡝⢦⠝⠊⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢪⢳⠝⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+        this dendro vision really looks like a heart so yes hehehe HAHAHAH alsoo uhh this might be going to far buttt just wanna clarifyy everything yes yess its not your responsibilityy now or anythingg but i knoww di naman ganon so yes but just wanna clarify still sincee you said before you felt bad that you were going to sleep and anoo nononononononn absolutely noo its really really finee huhuhu so yes thats all i think for thatt ˙✧˖°📷 ⋆｡˚꩜ always take careee againn and always have a goodnightttyy༘⋆♡⸝⸝💌⊹。°˖➴
+    </p>
+        <img src="img.jpg">
+        <p>Here are the control if youu want to turn off the soundss alsoo went with tbhk ed insteadd ehhehe ₊✩‧₊˚౨ৎ˚₊✩‧₊</p>
+        <div class="audio-player">
+            <audio id="myAudio">
+              <source src="m.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+            <div class="controls">
+              <button id="playPauseBtn">Play</button>
+              <input type="range" id="seekBar" value="0">
+              <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+              <button id="muteBtn">Mute</button>
+              <input type="range" id="volumeBar" min="0" max="1" step="0.1" value="1">
+            </div>
+          </div>
+          </div>
+          
+          <script>
+          const audio = document.getElementById('myAudio');
+const autoplayMessage = document.getElementById('autoplayMessage');
+
+// Enable audio playback after user interaction
+document.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    autoplayMessage.style.display = 'none'; // Hide the message after playback starts
+  }
+});
+
+// Play/Pause functionality
+const playPauseBtn = document.getElementById('playPauseBtn');
+playPauseBtn.addEventListener('click', () => {
+  if (audio.paused) {
+    audio.play();
+    playPauseBtn.textContent = 'Pause';
+  } else {
+    audio.pause();
+    playPauseBtn.textContent = 'Play';
+  }
+});
+
+// Update seek bar as audio plays
+const seekBar = document.getElementById('seekBar');
+const currentTime = document.getElementById('currentTime');
+const duration = document.getElementById('duration');
+
+audio.addEventListener('timeupdate', () => {
+  seekBar.value = audio.currentTime;
+  currentTime.textContent = formatTime(audio.currentTime);
+});
+
+// Seek functionality
+seekBar.max = audio.duration;
+seekBar.addEventListener('input', () => {
+  audio.currentTime = seekBar.value;
+});
+
+// Update duration when metadata is loaded
+audio.addEventListener('loadedmetadata', () => {
+  seekBar.max = audio.duration;
+  duration.textContent = formatTime(audio.duration);
+});
+
+// Mute functionality
+const muteBtn = document.getElementById('muteBtn');
+muteBtn.addEventListener('click', () => {
+  audio.muted = !audio.muted;
+  muteBtn.textContent = audio.muted ? 'Unmute' : 'Mute';
+});
+
+// Volume control
+const volumeBar = document.getElementById('volumeBar');
+volumeBar.addEventListener('input', () => {
+  audio.volume = volumeBar.value;
+});
+
+// Helper function to format time
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  const seconds = Math.floor(time % 60);
+  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+}
+          </script>
+</div>
+</body>
